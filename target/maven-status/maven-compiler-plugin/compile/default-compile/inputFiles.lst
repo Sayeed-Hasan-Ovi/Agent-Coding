@@ -1,0 +1,8 @@
+/workspaces/Agent-Coding/src/main/java/com/loanmanagement/service/EligibilityService.java
+/workspaces/Agent-Coding/src/main/java/com/loanmanagement/dto/EligibilityCheckRequest.java
+/workspaces/Agent-Coding/src/main/java/com/loanmanagement/model/EligibilityRecord.java
+/workspaces/Agent-Coding/src/main/java/com/loanmanagement/dto/ListUploadResponse.java
+/workspaces/Agent-Coding/src/main/java/com/loanmanagement/controller/LoanEligibilityController.java
+/workspaces/Agent-Coding/src/main/java/com/loanmanagement/LoanEligibilityApplication.java
+/workspaces/Agent-Coding/src/main/java/com/loanmanagement/dto/EligibilityCheckResponse.java
+/workspaces/Agent-Coding/src/main/java/com/loanmanagement/model/ListType.java

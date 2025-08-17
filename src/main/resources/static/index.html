@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Eligibility Management System</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1><i class="fas fa-bank"></i> Loan Eligibility Management System</h1>
+            <p>Upload eligibility lists and check account status</p>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav-tabs">
+            <button class="tab-btn active" onclick="showTab('upload')">
+                <i class="fas fa-upload"></i> List Upload
+            </button>
+            <button class="tab-btn" onclick="showTab('eligibility')">
+                <i class="fa    s fa-search"></i> Eligibility Check
+            </button>
+            <button class="tab-btn" onclick="showTab('statistics')">
+                <i class="fas fa-chart-bar"></i> Statistics
+            </button>
+        </nav>
+
+        <!-- Upload Tab -->
+        <div id="upload" class="tab-content active">
+            <h2>Upload Eligibility Lists</h2>
+            <div class="list-grid">
+                <!-- Ineligibility Lists -->
+                <div class="list-section">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Ineligibility Lists</h3>
+                    <div class="upload-forms">
+                        <div class="upload-form">
+                            <label>STR - Suspicious Activity</label>
+                            <input type="file" id="str-file" accept=".csv">
+                            <button onclick="uploadList('str', 'str-file')">Upload</button>
+                            <div class="status" id="str-status"></div>
+                        </div>
+                        
+                        <div class="upload-form">
+                            <label>CR - Control Report</label>
+                            <input type="file" id="cr-file" accept=".csv">
+                            <button onclick="uploadList('cr', 'cr-file')">Upload</button>
+                            <div class="status" id="cr-status"></div>
+                        </div>
+                        
+                        <div class="upload-form">
+                            <label>Multiple Account Against ID</label>
+                            <input type="file" id="multiple-account-file" accept=".csv">
+                            <button onclick="uploadList('multiple-account', 'multiple-account-file')">Upload</button>
+                            <div class="status" id="multiple-account-status"></div>
+                        </div>
+                        
+                        <div class="upload-form">
+                            <label>FDM - Fraudulent</label>
+                            <input type="file" id="fdm-file" accept=".csv">
+                            <button onclick="uploadList('fdm', 'fdm-file')">Upload</button>
+                            <div class="status" id="fdm-status"></div>
+                        </div>
+                        
+                        <div class="upload-form">
+                            <label>SST - Special Support Recommendation</label>
+                            <input type="file" id="sst-file" accept=".csv">
+                            <button onclick="uploadList('sst', 'sst-file')">Upload</button>
+                            <div class="status" id="sst-status"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Delist Lists -->
+                <div class="list-section">
+                    <h3><i class="fas fa-check-circle"></i> Delist (Eligibility Restoration)</h3>
+                    <div class="upload-forms">
+                        <div class="upload-form">
+                            <label>D-STR - Delist Suspicious Activity</label>
+                            <input type="file" id="d-str-file" accept=".csv">
+                            <button onclick="uploadList('d-str', 'd-str-file')">Upload</button>
+                            <div class="status" id="d-str-status"></div>
+                        </div>
+                        
+                        <div class="upload-form">
+                            <label>D-CR - Delist Control Report</label>
+                            <input type="file" id="d-cr-file" accept=".csv">
+                            <button onclick="uploadList('d-cr', 'd-cr-file')">Upload</button>
+                            <div class="status" id="d-cr-status"></div>
+                        </div>
+                        
+                        <div class="upload-form">
+                            <label>D-Multiple Account</label>
+                            <input type="file" id="d-multiple-account-file" accept=".csv">
+                            <button onclick="uploadList('d-multiple-account', 'd-multiple-account-file')">Upload</button>
+                            <div class="status" id="d-multiple-account-status"></div>
+                        </div>
+                        
+                        <div class="upload-form">
+                            <label>D-FDM - Delist Fraudulent</label>
+                            <input type="file" id="d-fdm-file" accept=".csv">
+                            <button onclick="uploadList('d-fdm', 'd-fdm-file')">Upload</button>
+                            <div class="status" id="d-fdm-status"></div>
+                        </div>
+                        
+                        <div class="upload-form">
+                            <label>D-SST - Delist Special Support</label>
+                            <input type="file" id="d-sst-file" accept=".csv">
+                            <button onclick="uploadList('d-sst', 'd-sst-file')">Upload</button>
+                            <div class="status" id="d-sst-status"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CSV Format Info -->
+            <div class="info-box">
+                <h4><i class="fas fa-info-circle"></i> CSV Format</h4>
+                <p>Upload CSV files with the following format:</p>
+                <code>AccountID,Reason<br>12345,Suspicious transaction detected<br>67890,Multiple accounts found</code>
+            </div>
+        </div>
+
+        <!-- Eligibility Check Tab -->
+        <div id="eligibility" class="tab-content">
+            <h2>Check Account Eligibility</h2>
+            <div class="eligibility-form">
+                <div class="input-group">
+                    <label for="account-id">Account ID:</label>
+                    <input type="text" id="account-id" placeholder="Enter account ID to check">
+                    <button onclick="checkEligibility()">Check Eligibility</button>
+                </div>
+            </div>
+            
+            <div id="eligibility-result" class="result-box"></div>
+        </div>
+
+        <!-- Statistics Tab -->
+        <div id="statistics" class="tab-content">
+            <h2>System Statistics</h2>
+            <div class="stats-container">
+                <button onclick="loadStatistics()">Refresh Statistics</button>
+                <div id="stats-content" class="stats-content"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

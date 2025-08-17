@@ -1,0 +1,9 @@
+com/loanmanagement/dto/ListUploadResponse.class
+com/loanmanagement/dto/EligibilityCheckResponse$IneligibilityReason.class
+com/loanmanagement/dto/EligibilityCheckResponse.class
+com/loanmanagement/LoanEligibilityApplication.class
+com/loanmanagement/service/EligibilityService.class
+com/loanmanagement/controller/LoanEligibilityController.class
+com/loanmanagement/dto/EligibilityCheckRequest.class
+com/loanmanagement/model/EligibilityRecord.class
+com/loanmanagement/model/ListType.class
